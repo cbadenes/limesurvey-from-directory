@@ -1,0 +1,1 @@
+docker run -it --rm -p 8080:80 -v /Users/cbadenes/Projects/limesurvey-from-directory/pdf.js/:/var/www/html/viewer/ -v /Users/cbadenes/Documents/OEG/Projects/DrInventor/datasets/acm-siggraph-2006-2014/papers/sig100Papers/:/var/www/html/dataset/sig100Papers -v /Users/cbadenes/Projects/limesurvey-from-directory/limesurvey:/app/limesurvey crramirez/limesurvey
