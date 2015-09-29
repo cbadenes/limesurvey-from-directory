@@ -1,11 +1,16 @@
 package es.upm.oeg.lab.survey.lime;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Created by cbadenes on 28/09/15.
  */
 public class XmlDocument {
 
-    public static String create(StringBuilder answers, StringBuilder questions){
+    public static String create(String surveyId, String title, String description, StringBuilder answers, StringBuilder groups, StringBuilder questions){
+
+
+
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<document>\n" +
                 " <LimeSurveyDocType>Survey</LimeSurveyDocType>\n" +
@@ -39,16 +44,7 @@ public class XmlDocument {
                 "   <fieldname>grelevance</fieldname>\n" +
                 "  </fields>\n" +
                 "  <rows>\n" +
-                "   <row>\n" +
-                "    <gid><![CDATA[1]]></gid>\n" +
-                "    <sid><![CDATA[535831]]></sid>\n" +
-                "    <group_name><![CDATA[Domains]]></group_name>\n" +
-                "    <group_order><![CDATA[0]]></group_order>\n" +
-                "    <description><![CDATA[Rank the domains according to the paper's content]]></description>\n" +
-                "    <language><![CDATA[en]]></language>\n" +
-                "    <randomization_group/>\n" +
-                "    <grelevance/>\n" +
-                "   </row>\n" +
+                groups.toString() +
                 "  </rows>\n" +
                 " </groups>\n" +
                 " <questions>\n" +
@@ -74,21 +70,6 @@ public class XmlDocument {
                 questions.toString() +
                 "</rows>\n" +
                 " </questions>\n" +
-                " <question_attributes>\n" +
-                "  <fields>\n" +
-                "   <fieldname>qid</fieldname>\n" +
-                "   <fieldname>attribute</fieldname>\n" +
-                "   <fieldname>value</fieldname>\n" +
-                "   <fieldname>language</fieldname>\n" +
-                "  </fields>\n" +
-                "  <rows>\n" +
-                "   <row>\n" +
-                "    <qid><![CDATA[1]]></qid>\n" +
-                "    <attribute><![CDATA[random_order]]></attribute>\n" +
-                "    <value><![CDATA[1]]></value>\n" +
-                "   </row>\n" +
-                "  </rows>\n" +
-                " </question_attributes>\n" +
                 " <surveys>\n" +
                 "  <fields>\n" +
                 "   <fieldname>sid</fieldname>\n" +
@@ -149,21 +130,21 @@ public class XmlDocument {
                 "  </fields>\n" +
                 "  <rows>\n" +
                 "   <row>\n" +
-                "    <sid><![CDATA[535831]]></sid>\n" +
+                "    <sid><![CDATA["+surveyId+"]]></sid>\n" +
                 "    <admin><![CDATA[Administrator]]></admin>\n" +
-                "    <adminemail><![CDATA[cbadenes@fi.upm.es]]></adminemail>\n" +
+                "    <adminemail><![CDATA[drinventor.upm@gmail.com]]></adminemail>\n" +
                 "    <anonymized><![CDATA[N]]></anonymized>\n" +
                 "    <faxto/>\n" +
-                "    <format><![CDATA[S]]></format>\n" +
+                "    <format><![CDATA[G]]></format>\n" +
                 "    <savetimings><![CDATA[Y]]></savetimings>\n" +
-                "    <template><![CDATA[default]]></template>\n" +
+                "    <template><![CDATA[bluengrey]]></template>\n" +
                 "    <language><![CDATA[en]]></language>\n" +
                 "    <additional_languages/>\n" +
                 "    <datestamp><![CDATA[Y]]></datestamp>\n" +
                 "    <usecookie><![CDATA[N]]></usecookie>\n" +
-                "    <allowregister><![CDATA[Y]]></allowregister>\n" +
+                "    <allowregister><![CDATA[N]]></allowregister>\n" +
                 "    <allowsave><![CDATA[Y]]></allowsave>\n" +
-                "    <autonumber_start><![CDATA[3]]></autonumber_start>\n" +
+                "    <autonumber_start><![CDATA[0]]></autonumber_start>\n" +
                 "    <autoredirect><![CDATA[N]]></autoredirect>\n" +
                 "    <allowprev><![CDATA[Y]]></allowprev>\n" +
                 "    <printanswers><![CDATA[N]]></printanswers>\n" +
@@ -172,15 +153,15 @@ public class XmlDocument {
                 "    <publicstatistics><![CDATA[N]]></publicstatistics>\n" +
                 "    <publicgraphs><![CDATA[N]]></publicgraphs>\n" +
                 "    <listpublic><![CDATA[N]]></listpublic>\n" +
-                "    <htmlemail><![CDATA[Y]]></htmlemail>\n" +
-                "    <sendconfirmation><![CDATA[Y]]></sendconfirmation>\n" +
+                "    <htmlemail><![CDATA[N]]></htmlemail>\n" +
+                "    <sendconfirmation><![CDATA[N]]></sendconfirmation>\n" +
                 "    <tokenanswerspersistence><![CDATA[N]]></tokenanswerspersistence>\n" +
-                "    <assessments><![CDATA[N]]></assessments>\n" +
+                "    <assessments><![CDATA[Y]]></assessments>\n" +
                 "    <usecaptcha><![CDATA[N]]></usecaptcha>\n" +
                 "    <usetokens><![CDATA[N]]></usetokens>\n" +
-                "    <bounce_email><![CDATA[your-email@example.net]]></bounce_email>\n" +
-                "    <emailresponseto/>\n" +
-                "    <emailnotificationto/>\n" +
+                "    <bounce_email><![CDATA[drinventor.upm@gmail.com]]></bounce_email>\n" +
+                "    <emailresponseto><![CDATA[drinventor.upm@gmail.com]]></emailresponseto>\n" +
+                "    <emailnotificationto><![CDATA[drinventor.upm@gmail.com]]></emailnotificationto>\n" +
                 "    <tokenlength><![CDATA[15]]></tokenlength>\n" +
                 "    <showxquestions><![CDATA[Y]]></showxquestions>\n" +
                 "    <showgroupinfo><![CDATA[B]]></showgroupinfo>\n" +
@@ -189,12 +170,12 @@ public class XmlDocument {
                 "    <bounceprocessing><![CDATA[N]]></bounceprocessing>\n" +
                 "    <showwelcome><![CDATA[Y]]></showwelcome>\n" +
                 "    <showprogress><![CDATA[Y]]></showprogress>\n" +
-                "    <questionindex><![CDATA[0]]></questionindex>\n" +
+                "    <questionindex><![CDATA[1]]></questionindex>\n" +
                 "    <navigationdelay><![CDATA[0]]></navigationdelay>\n" +
-                "    <nokeyboard><![CDATA[N]]></nokeyboard>\n" +
+                "    <nokeyboard><![CDATA[Y]]></nokeyboard>\n" +
                 "    <alloweditaftercompletion><![CDATA[N]]></alloweditaftercompletion>\n" +
                 "    <googleanalyticsstyle><![CDATA[0]]></googleanalyticsstyle>\n" +
-                "    <googleanalyticsapikey/>\n" +
+                "    <googleanalyticsapikey/>" +
                 "   </row>\n" +
                 "  </rows>\n" +
                 " </surveys>\n" +
@@ -227,120 +208,27 @@ public class XmlDocument {
                 "  </fields>\n" +
                 "  <rows>\n" +
                 "   <row>\n" +
-                "    <surveyls_survey_id><![CDATA[535831]]></surveyls_survey_id>\n" +
+                "    <surveyls_survey_id><![CDATA["+surveyId+"]]></surveyls_survey_id>\n" +
                 "    <surveyls_language><![CDATA[en]]></surveyls_language>\n" +
-                "    <surveyls_title><![CDATA[SigGraph Dataset]]></surveyls_title>\n" +
-                "    <surveyls_description><![CDATA[<span style=\"font-family: SwissRom; font-size: 10px; line-height: 14px;\">SIGGRAPH (short for Special Interest Group on GRAPHics and Interactive Techniques) is the name of the annual conference on computer graphics (CG) convened by the ACM SIGGRAPH organization.</span>]]></surveyls_description>\n" +
-                "    <surveyls_welcometext><![CDATA[Welcome to this survey about classification of computer graphic papers]]></surveyls_welcometext>\n" +
+                "    <surveyls_title><![CDATA["+title+"]]></surveyls_title>\n" +
+                "    <surveyls_description><![CDATA["+description+"]]></surveyls_description>\n" +
+                "    <surveyls_welcometext/>\n" +
                 "    <surveyls_endtext><![CDATA[Thanks!!]]></surveyls_endtext>\n" +
-                "    <surveyls_url><![CDATA[http://192.168.59.103:8080]]></surveyls_url>\n" +
-                "    <surveyls_urldescription><![CDATA[SigGraph Survey]]></surveyls_urldescription>\n" +
-                "    <surveyls_email_invite_subj><![CDATA[Invitation to participate in a survey]]></surveyls_email_invite_subj>\n" +
-                "    <surveyls_email_invite><![CDATA[Dear {FIRSTNAME},\n" +
-                "\n" +
-                "you have been invited to participate in a survey.\n" +
-                "\n" +
-                "The survey is titled:\n" +
-                "\"{SURVEYNAME}\"\n" +
-                "\n" +
-                "\"{SURVEYDESCRIPTION}\"\n" +
-                "\n" +
-                "To participate, please click on the link below.\n" +
-                "\n" +
-                "Sincerely,\n" +
-                "\n" +
-                "{ADMINNAME} ({ADMINEMAIL})\n" +
-                "\n" +
-                "----------------------------------------------\n" +
-                "Click here to do the survey:\n" +
-                "{SURVEYURL}\n" +
-                "\n" +
-                "If you do not want to participate in this survey and don't want to receive any more invitations please click the following link:\n" +
-                "{OPTOUTURL}\n" +
-                "\n" +
-                "If you are blacklisted but want to participate in this survey and want to receive invitations please click the following link:\n" +
-                "{OPTINURL}]]></surveyls_email_invite>\n" +
-                "    <surveyls_email_remind_subj><![CDATA[Reminder to participate in a survey]]></surveyls_email_remind_subj>\n" +
-                "    <surveyls_email_remind><![CDATA[Dear {FIRSTNAME},\n" +
-                "\n" +
-                "Recently we invited you to participate in a survey.\n" +
-                "\n" +
-                "We note that you have not yet completed the survey, and wish to remind you that the survey is still available should you wish to take part.\n" +
-                "\n" +
-                "The survey is titled:\n" +
-                "\"{SURVEYNAME}\"\n" +
-                "\n" +
-                "\"{SURVEYDESCRIPTION}\"\n" +
-                "\n" +
-                "To participate, please click on the link below.\n" +
-                "\n" +
-                "Sincerely,\n" +
-                "\n" +
-                "{ADMINNAME} ({ADMINEMAIL})\n" +
-                "\n" +
-                "----------------------------------------------\n" +
-                "Click here to do the survey:\n" +
-                "{SURVEYURL}\n" +
-                "\n" +
-                "If you do not want to participate in this survey and don't want to receive any more invitations please click the following link:\n" +
-                "{OPTOUTURL}]]></surveyls_email_remind>\n" +
-                "    <surveyls_email_register_subj><![CDATA[Survey registration confirmation]]></surveyls_email_register_subj>\n" +
-                "    <surveyls_email_register><![CDATA[Dear {FIRSTNAME},\n" +
-                "\n" +
-                "You, or someone using your email address, have registered to participate in an online survey titled {SURVEYNAME}.\n" +
-                "\n" +
-                "To complete this survey, click on the following URL:\n" +
-                "\n" +
-                "{SURVEYURL}\n" +
-                "\n" +
-                "If you have any questions about this survey, or if you did not register to participate and believe this email is in error, please contact {ADMINNAME} at {ADMINEMAIL}.]]></surveyls_email_register>\n" +
-                "    <surveyls_email_confirm_subj><![CDATA[Confirmation of your participation in our survey]]></surveyls_email_confirm_subj>\n" +
-                "    <surveyls_email_confirm><![CDATA[Dear {FIRSTNAME},\n" +
-                "\n" +
-                "this email is to confirm that you have completed the survey titled {SURVEYNAME} and your response has been saved. Thank you for participating.\n" +
-                "\n" +
-                "If you have any further questions about this email, please contact {ADMINNAME} on {ADMINEMAIL}.\n" +
-                "\n" +
-                "Sincerely,\n" +
-                "\n" +
-                "{ADMINNAME}]]></surveyls_email_confirm>\n" +
+                "    <surveyls_url><![CDATA[http://drinventor.eu]]></surveyls_url>\n" +
+                "    <surveyls_urldescription/>\n" +
+                "    <surveyls_email_invite_subj></surveyls_email_invite_subj>\n" +
+                "    <surveyls_email_invite></surveyls_email_invite>\n" +
+                "    <surveyls_email_remind_subj></surveyls_email_remind_subj>\n" +
+                "    <surveyls_email_remind></surveyls_email_remind>\n" +
+                "    <surveyls_email_register_subj></surveyls_email_register_subj>\n" +
+                "    <surveyls_email_register></surveyls_email_register>\n" +
+                "    <surveyls_email_confirm_subj></surveyls_email_confirm_subj>\n" +
+                "    <surveyls_email_confirm></surveyls_email_confirm>\n" +
                 "    <surveyls_dateformat><![CDATA[9]]></surveyls_dateformat>\n" +
-                "    <email_admin_notification_subj><![CDATA[Response submission for survey {SURVEYNAME}]]></email_admin_notification_subj>\n" +
-                "    <email_admin_notification><![CDATA[Hello,\n" +
-                "\n" +
-                "A new response was submitted for your survey '{SURVEYNAME}'.\n" +
-                "\n" +
-                "Click the following link to reload the survey:\n" +
-                "{RELOADURL}\n" +
-                "\n" +
-                "Click the following link to see the individual response:\n" +
-                "{VIEWRESPONSEURL}\n" +
-                "\n" +
-                "Click the following link to edit the individual response:\n" +
-                "{EDITRESPONSEURL}\n" +
-                "\n" +
-                "View statistics by clicking here:\n" +
-                "{STATISTICSURL}]]></email_admin_notification>\n" +
-                "    <email_admin_responses_subj><![CDATA[Response submission for survey {SURVEYNAME} with results]]></email_admin_responses_subj>\n" +
-                "    <email_admin_responses><![CDATA[Hello,\n" +
-                "\n" +
-                "A new response was submitted for your survey '{SURVEYNAME}'.\n" +
-                "\n" +
-                "Click the following link to reload the survey:\n" +
-                "{RELOADURL}\n" +
-                "\n" +
-                "Click the following link to see the individual response:\n" +
-                "{VIEWRESPONSEURL}\n" +
-                "\n" +
-                "Click the following link to edit the individual response:\n" +
-                "{EDITRESPONSEURL}\n" +
-                "\n" +
-                "View statistics by clicking here:\n" +
-                "{STATISTICSURL}\n" +
-                "\n" +
-                "\n" +
-                "The following answers were given by the participant:\n" +
-                "{ANSWERTABLE}]]></email_admin_responses>\n" +
+                "    <email_admin_notification_subj></email_admin_notification_subj>\n" +
+                "    <email_admin_notification></email_admin_notification>\n" +
+                "    <email_admin_responses_subj></email_admin_responses_subj>\n" +
+                "    <email_admin_responses></email_admin_responses>\n" +
                 "    <surveyls_numberformat><![CDATA[0]]></surveyls_numberformat>\n" +
                 "   </row>\n" +
                 "  </rows>\n" +
